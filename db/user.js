@@ -7,6 +7,7 @@ let UserSchema = new Schema({
     hobby: { type: String },
     age: { type: Number },
     sex: { type: String },
+    phone: { type: Number },
     grade: { type: Number }
 });
 

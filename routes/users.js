@@ -60,6 +60,7 @@ router.post('/newUser', async function (ctx) {
       hobby: dataValue.hobby,
       age: dataValue.age,
       sex: dataValue.sex,
+      phone: dataValue.phone,
       grade: 0
     }).save(function (err, res) {
       if (err) {
@@ -76,6 +77,32 @@ router.post('/newUser', async function (ctx) {
   ctx.body = {
     success: true,
     message: messageTxt
+  }
+})
+
+
+//拉去个人信息
+router.post('/userInfo', async function (ctx) {
+  if (ctx.request.body.id) {
+    var dataUser = {};
+    await User.find({ 'id': ctx.request.body.id }, function (err, comment) {
+      if (err)
+        return
+      if (comment.length) {
+        dataUser = comment[0]
+      } else {
+        dataUser = null
+      }
+    })
+    ctx.body = {
+      success: true,
+      data: dataUser
+    }
+  } else {
+    ctx.body = {
+      success: false,
+      message: "信息拉去失败"
+    }
   }
 })
 
