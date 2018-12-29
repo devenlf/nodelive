@@ -56,12 +56,11 @@ router.post('/newUser', async function (ctx) {
   await new Promise(function (resolve, reject) {
     new User({
       id: dataValue.id,
-      naickName: dataValue.naickName,
       hobby: dataValue.hobby,
       age: dataValue.age,
       sex: dataValue.sex,
       phone: dataValue.phone,
-      grade: 0
+      grade: 1
     }).save(function (err, res) {
       if (err) {
         messageTxt = "数据库错误"
@@ -106,10 +105,6 @@ router.post('/userInfo', async function (ctx) {
   }
 })
 
-
-router.post('/saveFabu', function (ctx, next) {
-
-})
 
 
 function getOpenIdAndKey(code) {

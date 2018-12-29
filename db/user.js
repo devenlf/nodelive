@@ -3,7 +3,6 @@ var mongoose = require('./index'),
 
 let UserSchema = new Schema({
     id: { type: String },
-    naickName: { type: String },
     hobby: { type: String },
     age: { type: Number },
     sex: { type: String },
