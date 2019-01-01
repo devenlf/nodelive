@@ -8,6 +8,7 @@ const logger = require('koa-logger')
 const cors = require('koa2-cors');
 // const index = require('./routes/index')
 const users = require('./routes/users')
+const postFile = require('./routes/postFile')
 
 const db = require('./db/index')
 
@@ -49,6 +50,7 @@ app.use(async (ctx, next) => {
 
 // routes
 app.use(users.routes(), users.allowedMethods())
+app.use(postFile.routes(), postFile.allowedMethods())
 
 //
 app.on('connect', (data, ctx) => {
