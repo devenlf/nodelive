@@ -56,11 +56,11 @@ router.post('/newUser', async function (ctx) {
   await new Promise(function (resolve, reject) {
     new User({
       id: dataValue.id,
-      naickName: dataValue.naickName,
       hobby: dataValue.hobby,
       age: dataValue.age,
       sex: dataValue.sex,
-      grade: 0
+      phone: dataValue.phone,
+      grade: 1
     }).save(function (err, res) {
       if (err) {
         messageTxt = "数据库错误"
@@ -80,9 +80,31 @@ router.post('/newUser', async function (ctx) {
 })
 
 
-router.post('/saveFabu', function (ctx, next) {
-
+//拉去个人信息
+router.post('/userInfo', async function (ctx) {
+  if (ctx.request.body.id) {
+    var dataUser = {};
+    await User.find({ 'id': ctx.request.body.id }, function (err, comment) {
+      if (err)
+        return
+      if (comment.length) {
+        dataUser = comment[0]
+      } else {
+        dataUser = null
+      }
+    })
+    ctx.body = {
+      success: true,
+      data: dataUser
+    }
+  } else {
+    ctx.body = {
+      success: false,
+      message: "信息拉去失败"
+    }
+  }
 })
+
 
 
 function getOpenIdAndKey(code) {
